@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // CONTACT FORM → WHATSAPP
 // ============================================================
 
-const WHATSAPP_NUMBER = "15551234567";
+const WHATSAPP_NUMBER = "8129911207";
 
 const supportForm = document.getElementById("support-form");
 
