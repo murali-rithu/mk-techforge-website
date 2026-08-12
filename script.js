@@ -250,3 +250,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// ============================================================
+// CONTACT FORM → WHATSAPP
+// ============================================================
+
+const WHATSAPP_NUMBER = "15551234567";
+
+const supportForm = document.getElementById("support-form");
+
+if (supportForm) {
+    supportForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Get form values
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const serviceElement = document.getElementById("service-type");
+        const service = serviceElement.options[serviceElement.selectedIndex].text;
+        const message = document.getElementById("message").value.trim();
+
+        // Create WhatsApp message
+        const whatsappMessage =
+`*NEW SUPPORT REQUEST - MK TECHFORGE*
+
+*Customer Name:* ${name}
+*Phone:* ${phone}
+*Email:* ${email}
+*Service Required:* ${service}
+
+*Issue / Requirement:*
+${message}
+
+Please contact me regarding this request.`;
+
+        // Encode message for WhatsApp URL
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+
+        // WhatsApp URL
+        const whatsappURL =
+            `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+        // Open WhatsApp
+        window.open(whatsappURL, "_blank");
+
+        // Optional success notification
+        const toast = document.getElementById("toast-notification");
+
+        if (toast) {
+            toast.textContent = "Opening WhatsApp...";
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        // Clear form
+        supportForm.reset();
+    });
+}
